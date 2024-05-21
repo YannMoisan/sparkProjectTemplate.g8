@@ -7,7 +7,7 @@ lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
       organization := "$organization$",
-      scalaVersion := "2.12.13"
+      scalaVersion := "2.13.14"
     )),
     name := "$name$",
     version := "$version$",
@@ -26,8 +26,8 @@ lazy val root = (project in file(".")).
       "org.apache.spark" %% "spark-streaming" % "$sparkVersion$" % "provided",
       "org.apache.spark" %% "spark-sql" % "$sparkVersion$" % "provided",
 
-      "org.scalatest" %% "scalatest" % "3.2.2" % "test",
-      "org.scalacheck" %% "scalacheck" % "1.15.2" % "test",
+      "org.scalatest" %% "scalatest" % "3.2.18" % "test",
+      "org.scalacheck" %% "scalacheck" % "1.18.0" % "test",
       "com.holdenkarau" %% "spark-testing-base" % "$sparkVersion$_$sparkTestingbaseRelease$" % "test"
     ),
 
