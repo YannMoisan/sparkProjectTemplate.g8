@@ -17,7 +17,7 @@ lazy val root = (project in file(".")).
     javacOptions ++= Seq("-source", "1.8", "-target", "1.8"),
     javaOptions ++= Seq("-Xms512M", "-Xmx2048M"),
     scalacOptions ++= Seq("-deprecation", "-unchecked"),
-    parallelExecution in Test := false,
+    Test / parallelExecution := false,
     fork := true,
 
     coverageHighlighting := true,
@@ -32,17 +32,16 @@ lazy val root = (project in file(".")).
     ),
 
     // uses compile classpath for the run task, including "provided" jar (cf http://stackoverflow.com/a/21803413/3827)
-    run in Compile := Defaults.runTask(fullClasspath in Compile, mainClass in (Compile, run), runner in (Compile, run)).evaluated,
+    Compile / run := Defaults.runTask(Compile / fullClasspath, Compile / run / mainClass, Compile / run / runner).evaluated,
 
     scalacOptions ++= Seq("-deprecation", "-unchecked"),
     pomIncludeRepository := { x => false },
 
-   resolvers ++= Seq(
+    resolvers ++= Seq(
       "sonatype-releases" at "https://oss.sonatype.org/content/repositories/releases/",
       "Typesafe repository" at "https://repo.typesafe.com/typesafe/releases/",
-      "Second Typesafe repo" at "https://repo.typesafe.com/typesafe/maven-releases/",
-      Resolver.sonatypeRepo("public")
-    ),
+      "Second Typesafe repo" at "https://repo.typesafe.com/typesafe/maven-releases/"
+    ) ++ Resolver.sonatypeOssRepos("public"),
 
     pomIncludeRepository := { _ => false },
 
